@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="processLayerFlow" doc:id="4015c368-1380-493b-8686-ce15bd3b6d80" >
+		<http:listener doc:name="Listener" doc:id="85529f76-d5ce-4332-b074-c04d82af9f6b" config-ref="Listner" path="/rainfall"/>
+		<logger level="INFO" doc:name="Logger" doc:id="1b23111a-8dd8-454a-95e1-8da769014a3f" />
+		<choice doc:name="Choice" doc:id="0cf3a188-b87a-4b3e-94a3-c4ec905a10f6" >
+			<when expression="#[attributes.queryParams.city != null and attributes.queryParams.month != null and attributes.queryParams.units != null]">
+				<flow-ref doc:name="Flow Reference" doc:id="1babe7a2-de19-4c87-849f-76fc990171e5" name="getMonthlyRainfallAvgByCity" />
+			</when>
+			<when expression="#[attributes.queryParams.city !=null and attributes.queryParams.units !=null]">
+				<flow-ref doc:name="Flow Reference" doc:id="b8bd042a-41f9-404c-92fe-38ed109533ba" name="getYearlyRainfallAvgByCity"/>
+			</when>
+			<otherwise >
+				<flow-ref doc:name="Flow Reference" doc:id="80a3060f-7cd0-408c-8445-8a046c069e94" name="getRainfallByCity"/>
+			</otherwise>
+		</choice>
+	</flow>
+</mule>

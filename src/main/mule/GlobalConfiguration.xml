@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="Listner" doc:name="HTTP Listener config" doc:id="56e3edce-0aea-401f-a539-b6dd9c6f0287" basePath="/weather" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="Rainfall_Configuration" doc:name="HTTP Request configuration" doc:id="37c5bd3f-f106-41cd-999c-a71871dc7dfb" basePath="/weather" >
+		<http:request-connection host="localhost" port="4444" />
+	</http:request-config>
+</mule>
